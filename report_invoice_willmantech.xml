@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_invoice_willmantech">
+        <div class="container" style="font-family: Arial, sans-serif; font-size: 14px;">
+            
+            <div class="cliente-datos">
+                <p style="margin: 2px 0;">Carlos Ruiz</p>
+                <p style="margin: 2px 0;">Valencia</p>
+                <p style="margin: 2px 0;">Spain</p>
+            </div>
+            
+            <br/>
+            
+            <h2>Order # <span t-field="doc.name"/></h2>
+            
+            <p style="margin: 2px 0;"><strong>Order Date</strong></p>
+            <p style="margin: 2px 0;"><span t-field="doc.date"/></p>
+            
+            <p style="margin: 2px 0;"><strong>Salesperson</strong></p>
+            <p style="margin: 2px 0;">Administrator</p>
+            
+            <br/>
+            
+            <p style="color: red; font-weight: bold; margin-bottom: 2px;">
+                Atención: Este documento vinculante está sujeto a las condiciones generales de venta de DAM/DAW S.L. (CIF: B-12345678).
+            </p>
+            
+            <p style="font-size: 10px; color: #555; margin-top: 0;">
+                Protección de datos: En cumplimiento de la Ley Orgánica 3/2018 y el RGPD europeo, le informamos que sus datos serán tratados de forma estrictamente confidencial. Puede ejercer sus derechos ARCO dirigiéndose a nuestro DPO.
+            </p>
+            
+            <br/>
+            
+            <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                <thead>
+                    <tr style="border-bottom: 1px solid black;">
+                        <th style="padding: 8px 0;">Description</th>
+                        <th style="padding: 8px 0;">Quantity</th>
+                        <th style="padding: 8px 0;">Unit Price</th>
+                        
+                        <th t-if="doc.invoice_line_ids and doc.invoice_line_ids[0].discount" style="padding: 8px 0;">
+                            Discount
+                        </th>
+                        
+                        <th style="padding: 8px 0;">Taxes</th>
+                        <th style="padding: 8px 0;">Amount</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr t-foreach="doc.invoice_line_ids" t-as="line">
+                        <td style="padding: 8px 0;"><span t-field="line.name"/></td>
+                        <td style="padding: 8px 0;"><span t-field="line.quantity"/> Units</td>
+                        <td style="padding: 8px 0;"><span t-field="line.price_unit"/></td>
+                        
+                        <td t-if="doc.invoice_line_ids and doc.invoice_line_ids[0].discount" style="padding: 8px 0;">
+                            <span t-field="line.discount"/>
+                        </td>
+                        
+                        <td style="padding: 8px 0;">0% Exports</td>
+                        <td style="padding: 8px 0;">$ <span t-field="line.price_subtotal"/></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <br/><br/>
+            
+            <div style="width: 300px;">
+                <table
+                    
